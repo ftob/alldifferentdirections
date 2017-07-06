@@ -58,7 +58,7 @@ class Directions implements DirectionsCollectionInterface
         while($this->hasNext($directions)) {
 
             if ($this->nextElementIs($directions, self::TURN)) {
-                var_dump(floatval(next($directions)));
+                next($directions);
 
                 $angle += floatval(next($directions));
             } elseif ($this->nextElementIs($directions, self::WALK)) {
