@@ -14,7 +14,7 @@ class DifferentDirections implements Stringable, Formatter
     /** @var  SplFileObject */
     protected $file;
 
-    protected $format = '%f %f %f';
+    protected $format = '%F %F %F';
 
     public function __construct(SplFileObject $file, DirectionsCollectionInterface $directionsCollection)
     {
@@ -54,6 +54,7 @@ class DifferentDirections implements Stringable, Formatter
             for ($i = 0; $i < $n; $i++) {
                 $this->directions->addDirection($this->file->fgets());
             }
+
             $avgDirection = $this->directions->getAvgDirection();
             $avgDestination = $this->directions->getAvgDestination($avgDirection);
 
@@ -76,8 +77,9 @@ class DifferentDirections implements Stringable, Formatter
             // $a[0] - Direction
             // $a[1] - float
             // Sorry. It's bad trip (trick)
-            $result .= sprintf($this->getFormat(), $a[0]->getLatitude(), $a[0]->getLongitude(), $a[2]) . "\n";
+            $result .= sprintf($this->getFormat(), $a[0]->getX(), $a[0]->getY(), $a[1]) . "\n";
         }
+
         return $result;
     }
 }
