@@ -125,7 +125,8 @@ class AllDifferentDirectionsTest extends \PHPUnit_Framework_TestCase{
             }));
         /** @var \SplFileObject $file */
         $d = new DifferentDirections($file, new Directions());
-
+        var_dump($d);
+        die();
         $this->assertInternalType('string', (string)$d);
 
     }
