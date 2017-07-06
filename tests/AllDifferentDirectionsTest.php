@@ -1,6 +1,7 @@
 <?php
 
 namespace Ftob\AllDifferentDirections\Tests;
+use Ftob\AllDifferentDirections\Direction;
 use Ftob\AllDifferentDirections\Directions;
 
 /**
@@ -8,7 +9,7 @@ use Ftob\AllDifferentDirections\Directions;
  * @author Nikita Volkov
  */
 
-class AllDifferentDirectionsTest {
+class AllDifferentDirectionsTest extends \PHPUnit_Framework_TestCase{
 
     /**
      * @return array
@@ -32,6 +33,12 @@ class AllDifferentDirectionsTest {
         $d = new Directions();
 
         $d->addDirection($payload);
+        /** @var Direction $direction */
+        foreach ($d->getDirections() as $direction) {
+            $this->assertInternalType('float', $direction->getLatitude());
+            $this->assertInternalType('float', $direction->getLongitude());
+        }
+
     }
 
     /**
@@ -39,19 +46,45 @@ class AllDifferentDirectionsTest {
      * @param $payload
      */
     public function testDirections_getAvgDestination($payload) {
+        $d = new Directions();
 
+        $d->addDirection($payload);
+        $res = $d->getAvgDestination($d->getAvgDirection());
+
+        $this->assertInternalType('float', $res);
     }
-
+    /**
+     * @dataProvider dataProviderPeopleAnswers
+     * @param string $payload
+     */
     public function testDirections_getAvgDirection($payload) {
-        //
-    }
+        $d = new Directions();
 
+        $d->addDirection($payload);
+
+        $res = $d->getAvgDirection();
+        $this->assertInternalType('float', $res->getLongitude());
+        $this->assertInternalType('float', $res->getLatitude());
+
+    }
+    /**
+     * @dataProvider dataProviderPeopleAnswers
+     * @param string $payload
+     */
     public function testDifferentDirections_all($payload) {
-        //
-    }
+        $d = new Directions();
 
+        $this->assertTrue(true);
+
+    }
+    /**
+     * @dataProvider dataProviderPeopleAnswers
+     * @param string $payload
+     */
     public function testDifferentDirections___toString($payload) {
         //
+        $this->assertTrue(true);
+
     }
 
 
