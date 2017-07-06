@@ -54,7 +54,6 @@ class DifferentDirections implements Stringable, Formatter
             for ($i = 0; $i < $n; $i++) {
                 $this->directions->addDirection($this->file->fgets());
             }
-
             $avgDirection = $this->directions->getAvgDirection();
             $avgDestination = $this->directions->getAvgDestination($avgDirection);
 
