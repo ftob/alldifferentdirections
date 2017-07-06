@@ -4,7 +4,7 @@ language: php
 
 php:
   - 7
-  - hhvm
+  - 7.1
 
 env:
   - COMPOSER_FLAGS=--prefer-lowest
