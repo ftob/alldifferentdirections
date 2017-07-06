@@ -1,9 +1,8 @@
 <?php
 namespace Ftob\AllDifferentDirections;
 
-
-
 /**
+ * Entity (Value object)
  * Class Direction
  * @package Ftob\AllDifferentDirections
  */

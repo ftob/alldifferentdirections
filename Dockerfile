@@ -12,7 +12,6 @@ RUN docker-php-ext-install mbstring
 # Install Composer and make it available in the PATH
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
-WORKDIR /usr/local/app/tests
+WORKDIR /usr/local/app
 
-#CMD ["php", "-S", "localhost:8000", "tests/Serverd.php"]
 CMD ["/bin/bash"]

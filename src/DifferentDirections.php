@@ -10,12 +10,16 @@ class DifferentDirections implements Stringable, Formatter
 {
     /** @var  DirectionsCollectionInterface */
     protected $directions;
-
     /** @var  SplFileObject */
     protected $file;
-
+    /** @var string  */
     protected $format = '%F %F %F';
 
+    /**
+     * DifferentDirections constructor.
+     * @param SplFileObject $file
+     * @param DirectionsCollectionInterface $directionsCollection
+     */
     public function __construct(SplFileObject $file, DirectionsCollectionInterface $directionsCollection)
     {
         $this->file = $file;
@@ -40,28 +44,44 @@ class DifferentDirections implements Stringable, Formatter
     }
 
 
+    /**
+     * @return array
+     * array [
+     *  0 => [
+     *      Direction,
+     *      float
+     * ],
+     * ....
+     * ]
+     */
     public function all(): array
     {
+        // Results
         $result = [];
-        $inc = 0;
         while(true) {
+            // New instance DirectionsCollectionInterface
             $this->directions = new $this->directions;
             $n = (int)$this->file->fgets();
-
+            // No people and break
             if ($n == 0) {
                 break;
             }
+
+            // Make collection directions
             for ($i = 0; $i < $n; $i++) {
                 $this->directions->addDirection($this->file->fgets());
             }
 
+            // Average directions
             $avgDirection = $this->directions->getAvgDirection();
+            // Max off
             $avgDestination = $this->directions->getAvgDestination($avgDirection);
 
+            // Set direction
             $result[$i][] = $avgDirection;
+            // Set float
             $result[$i][] = $avgDestination;
 
-            $inc++;
         }
         return $result;
     }

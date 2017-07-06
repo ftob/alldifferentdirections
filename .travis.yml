@@ -4,22 +4,14 @@ language: php
 
 php:
   - 7
-  - hhvm
+  - 7.1
 
 env:
   - COMPOSER_FLAGS=--prefer-lowest
 
-matrix:
-  exclude:
-    - php: hhvm
-      env: COMPOSER_FLAGS=--prefer-lowest
-  include:
-    - php: hhvm
-      env: COMPOSER_FLAGS=
-
 before_script:
     - travis_retry composer self-update
-    - travis_retry composer update --no-interaction --prefer-source --prefer-stable ${COMPOSER_FLAGS}
+    - travis_retry composer update --no-interaction --prefer-source --prefer-stable --prefer-lowest
 
 script:
     - vendor/bin/phpunit
