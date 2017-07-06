@@ -18,13 +18,13 @@ class Directions implements DirectionsCollectionInterface
 
     /**
      * @param $angle
-     * @param $lat
-     * @param $lon
+     * @param $x
+     * @param $y
      * @param $walk
      */
-    private function createCoordinatesByWalk($angle, &$lat, &$lon, $walk) {
-        $lat += $walk * cos(deg2rad($angle));
-        $lon += $walk * sin(deg2rad($angle));
+    private function createCoordinatesByWalk($angle, &$x, &$y, $walk) {
+        $x += $walk * cos(deg2rad($angle));
+        $y += $walk * sin(deg2rad($angle));
     }
 
     /**
@@ -44,7 +44,7 @@ class Directions implements DirectionsCollectionInterface
         $directions = explode(' ', $directions);
 
         if (!empty($directions)) {
-            $lat = floatval(next($directions)); $lon = floatval(next($directions));
+            $x = floatval(next($directions)); $y= floatval(next($directions));
 
 
             // It's start
@@ -62,13 +62,13 @@ class Directions implements DirectionsCollectionInterface
                 if ($this->nextElementIs($directions, self::TURN)) {
                     $angle += floatval(next($directions));
                 } elseif ($this->nextElementIs($directions, self::WALK)) {
-                    $this->createCoordinatesByWalk($angle, $lat, $lon, floatval(next($directions)));
+                    $this->createCoordinatesByWalk($angle, $x, $y, floatval(next($directions)));
                 } else {
 
                 }
             }
 
-            $this->directions[] = new Direction($lat, $lon);
+            $this->directions[] = new Direction($x, $y);
         } else {
             throw new KeyIndefinedException("Key undefined - " . var_export($directions. false));
         }
@@ -82,11 +82,11 @@ class Directions implements DirectionsCollectionInterface
         /** @var Direction $direction */
         $n = count($this->directions);
         foreach ($this->directions as $direction) {
-            $avgDirection->setLatitude($avgDirection->getLatitude() + $direction->getLatitude());
-            $avgDirection->setLongitude($avgDirection->getLongitude() + $direction->getLongitude());
+            $avgDirection->setX($avgDirection->getX() + $direction->getX());
+            $avgDirection->setY($avgDirection->getY() + $direction->getY());
         }
-        $avgDirection->setLatitude($avgDirection->getLatitude() / $n);
-        $avgDirection->setLongitude($avgDirection->getLongitude() / $n);
+        $avgDirection->setX($avgDirection->getX() / $n);
+        $avgDirection->setY($avgDirection->getY() / $n);
 
         return $avgDirection;
     }
@@ -101,8 +101,8 @@ class Directions implements DirectionsCollectionInterface
         /** @var Direction $direction */
         foreach ($this->directions as $direction) {
             $result = (float) max($destination, hypot(
-                    $avgDirection->getLatitude() - $direction->getLatitude(),
-                    $avgDirection->getLongitude() - $direction->getLongitude()
+                    $avgDirection->getX() - $direction->getX(),
+                    $avgDirection->getY() - $direction->getY()
                 )
             );
         }

@@ -10,10 +10,10 @@ namespace Ftob\AllDifferentDirections;
 class Direction
 {
     /** @var  float */
-    protected $lat;
+    protected $x;
 
     /** @var  float */
-    protected $lon;
+    protected $y;
 
     /**
      * Direction constructor.
@@ -27,29 +27,29 @@ class Direction
     }
 
     /**
-     * @param float $latitude
+     * @param float $x
      */
-    public function setLatitude(float $latitude) {
-        $this->lat = $latitude;
+    public function setX(float $x) {
+        $this->x = $x;
     }
 
     /**
-     * @param float $longitude
+     * @param float $y
      */
-    public function setLongitude(float $longitude) {
-        $this->lon = $longitude;
+    public function setY(float $y) {
+        $this->y = $y;
     }
     /**
      * @return float
      */
-    public function getLatitude() {
+    public function getX() {
         return $this->lat;
     }
 
     /**
      * @return float
      */
-    public function getLongitude() {
+    public function getY() {
         return $this->lon;
     }
 }
