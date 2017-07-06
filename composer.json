@@ -13,8 +13,5 @@
     },
     "autoload": {
         "psr-4": { "Ftob\\AllDifferentDirections\\": "src\\" }
-    },
-    "autoload-dev": {
-        "psr-4": { "Ftob\\AllDifferentDirections\\Tests\\": "tests\\" }
     }
 }
