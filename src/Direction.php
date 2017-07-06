@@ -17,13 +17,15 @@ class Direction
 
     /**
      * Direction constructor.
-     * @param float $latitude
-     * @param float $longitude
+     * @param float $x
+     * @param float $y
+     * @internal param float $latitude
+     * @internal param float $longitude
      */
-    public function __construct(float $latitude, float $longitude)
+    public function __construct(float $x, float $y)
     {
-        $this->lat = $latitude;
-        $this->lon = $longitude;
+        $this->x = $x;
+        $this->y = $y;
     }
 
     /**
@@ -43,13 +45,13 @@ class Direction
      * @return float
      */
     public function getX() {
-        return $this->lat;
+        return $this->x;
     }
 
     /**
      * @return float
      */
     public function getY() {
-        return $this->lon;
+        return $this->y;
     }
 }
