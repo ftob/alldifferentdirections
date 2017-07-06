@@ -24,6 +24,7 @@ class Directions implements DirectionsCollectionInterface
      * @param $walk
      */
     private function createCoordinatesByWalk($angle, &$x, &$y, $walk) {
+        // Cos (Radiant)
         $x += $walk * cos($angle * M_PI / 180);
         $y += $walk * sin($angle * M_PI / 180);
     }
@@ -75,6 +76,7 @@ class Directions implements DirectionsCollectionInterface
     }
 
     /**
+     *
      * @return Direction
      */
     public function getAvgDirection(): Direction {
